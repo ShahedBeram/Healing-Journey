@@ -1,0 +1,5992 @@
+{
+  "info": {
+    "_postman_id": "6ce33362-35c4-4ac7-8cac-f8621301eed2",
+    "name": "Healing Journey API",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55576924",
+    "_collection_link": "https://go.postman.co/collection/55576924-6ce33362-35c4-4ac7-8cac-f8621301eed2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "postman-echo.com/get",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "postman-echo.com/post",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "post"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Register - [Error] Empty Fields",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "أحمد خالد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224",
+              "disabled": true
+            },
+            {
+              "key": "email",
+              "value": "parent@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4",
+              "disabled": true
+            },
+            {
+              "key": "password_confirmation",
+              "value": "123456",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be",
+              "disabled": true
+            },
+            {
+              "key": "phone",
+              "value": "0599725641",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e",
+              "disabled": true
+            },
+            {
+              "key": "user_type",
+              "value": "parent",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0",
+              "disabled": true
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - [Error] Invalid phone and email Format-password not match",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "أحمد خالد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "parenttest.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725641/*",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "parent",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - Parent Registration",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "أحمد خالد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "parent@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725641",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "parent",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - Specialist Registration",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "د. سارة أحمد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "specialist@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725641",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "specialist",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            },
+            {
+              "key": "identity_card",
+              "type": "file",
+              "uuid": "45ee6bea-6b96-4439-88a0-975cbf4796ea",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016600216_85735.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - Donor Registration",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "سالم أحمد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "donor@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725641",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "donor",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            },
+            {
+              "key": "identity_card",
+              "type": "file",
+              "uuid": "6f499abe-a037-4481-abd4-b5a34b888395",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            },
+            {
+              "key": "certificate",
+              "type": "file",
+              "uuid": "2151920d-6104-451f-ac95-6a2df237be98",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200219_200746.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - Recovered_Child Registration",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "رامي محمد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "child@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725154",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "recovered_child",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            },
+            {
+              "key": "identity_card",
+              "type": "file",
+              "uuid": "8e4ca966-bebc-4662-b370-3a757d522e0e",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400012200690_537838.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - [Error] Email Already Exists",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "أحمد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "parent@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725254",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "parent",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register - Another Specialist Registration",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "full_name",
+              "value": "أحمد",
+              "type": "text",
+              "uuid": "af609962-5779-4fcd-8c86-b125eae69224"
+            },
+            {
+              "key": "email",
+              "value": "specialist1@test.com",
+              "type": "text",
+              "uuid": "321f914a-beb8-463a-983d-209f3d0efb45"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "b1a0217b-e7dd-40d6-9e50-2fccd09705b4"
+            },
+            {
+              "key": "password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "d553a4b9-7c48-4bbc-8fa3-f0d1ccd678be"
+            },
+            {
+              "key": "phone",
+              "value": "0599725254",
+              "type": "text",
+              "uuid": "4c13e9f1-ae0b-4606-ab8b-5c668ab48d5e"
+            },
+            {
+              "key": "user_type",
+              "value": "specialist",
+              "type": "text",
+              "uuid": "8be77fdd-d04d-4575-8756-5dd203dd82c0"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "5270f77c-553e-4e74-9940-80dfbbf883cb",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            },
+            {
+              "key": "identity_card",
+              "type": "file",
+              "uuid": "ba49b9d9-188c-4246-bddc-fc3f5ef16d9b",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/446632796_413247.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Home Page",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/home",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "home"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login - [Error] Invalid Credentials",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "parent@gmail.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "1234567",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Parent Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (res.token) {\r",
+              "    pm.environment.set(\"token\", res.token);\r",
+              "    console.log(\"✅ Token saved for:\", res.user?.role || \"user\");\r",
+              "} else {\r",
+              "    console.log(\"❌ No token in response\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "parent@test.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Specialist Login - Pending",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (res.token) {\r",
+              "    pm.environment.set(\"token\", res.token);\r",
+              "    console.log(\"✅ Token saved for:\", res.user?.role || \"user\");\r",
+              "} else {\r",
+              "    console.log(\"❌ No token in response\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "specialist@test.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Donor Login - Pending",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (res.token) {\r",
+              "    pm.environment.set(\"token\", res.token);\r",
+              "    console.log(\"✅ Token saved for:\", res.user?.role || \"user\");\r",
+              "} else {\r",
+              "    console.log(\"❌ No token in response\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "donor@test.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recovered_Child Login - Pending",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (res.token) {\r",
+              "    pm.environment.set(\"token\", res.token);\r",
+              "    console.log(\"✅ Token saved for:\", res.user?.role || \"user\");\r",
+              "} else {\r",
+              "    console.log(\"❌ No token in response\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "child@test.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const res = pm.response.json();\r",
+              "\r",
+              "if (res.token) {\r",
+              "    pm.environment.set(\"admin_token\", res.token);\r",
+              "    console.log(\"✅ Admin token saved\");\r",
+              "} else {\r",
+              "    console.log(\"❌ No token in response\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "admin@system.com",
+              "type": "text",
+              "uuid": "e3425d69-2327-44c7-9dda-b47e80170a0e"
+            },
+            {
+              "key": "password",
+              "value": "password123",
+              "type": "text",
+              "uuid": "064f64c3-f399-49bc-905d-8f52ad6cd3d6"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List All Pending Verifications",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Details",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Error - User Not Found",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/7",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Document - Identity Card",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/documents/3/view/identity_card",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "documents",
+            "3",
+            "view",
+            "identity_card"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Document - Certificate",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/documents/4/view/certificate",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "documents",
+            "4",
+            "view",
+            "certificate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Document - [Error] Document Not Found",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/documents/3/view/certificate",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "documents",
+            "3",
+            "view",
+            "certificate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Download Document",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/documents/3/download/identity_card",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "documents",
+            "3",
+            "download",
+            "identity_card"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Approve Account - Specialist",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/3/approve",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "3",
+            "approve"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Approve Account - Donor",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/4/approve",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "4",
+            "approve"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Approve Account - Recovered Child",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/5/approve",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "5",
+            "approve"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject User Account",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "rejection_reason",
+              "value": "عذراً، الوثائق المقدمة غير مطابقة للشروط المطلوبة",
+              "type": "text",
+              "uuid": "cb1bdc27-a9e8-430e-98cd-5d22ba9f63d4"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/6/reject",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "6",
+            "reject"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject - [Error] Missing Rejection Reason",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "rejection_reason",
+              "value": "عذراً، الوثائق المقدمة غير مطابقة للشروط المطلوبة",
+              "type": "text",
+              "uuid": "cb1bdc27-a9e8-430e-98cd-5d22ba9f63d4",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/verifications/6/reject",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "verifications",
+            "6",
+            "reject"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login - [Error] User rejected",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "specialist1@test.com",
+              "type": "text",
+              "uuid": "51d90f8e-980e-4bc1-9191-f3b53124aefd"
+            },
+            {
+              "key": "password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "e22c895d-a519-45ae-a659-9b6a115babc0"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Session",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "type": "text",
+              "uuid": "feaea6a3-26f6-4a21-a87b-560f4ec5bbe2",
+              "value": "نشاط التغذية الصحية"
+            },
+            {
+              "key": "description",
+              "type": "text",
+              "uuid": "42414fb6-f5bd-420f-8e14-99e8ce2b06f5",
+              "value": "شرح أهمية الغذاء المتوازن..."
+            },
+            {
+              "key": "date_time",
+              "type": "text",
+              "uuid": "52400dc4-2a3d-4156-bd3d-03a75d220511",
+              "value": "2026-07-12 10:00:00"
+            },
+            {
+              "key": "type",
+              "type": "text",
+              "uuid": "7c90c966-8d98-436e-b68b-cca9fdd62959",
+              "value": "activity"
+            },
+            {
+              "key": "session_category",
+              "type": "text",
+              "uuid": "6f1e1c62-3243-4c1a-a70e-bd28f5b2b045",
+              "value": "nutrition"
+            },
+            {
+              "key": "target_audience",
+              "type": "text",
+              "uuid": "97d39c71-3f4c-4c5f-827c-e2eeca11d1bb",
+              "value": "child"
+            },
+            {
+              "key": "participation_method",
+              "type": "text",
+              "uuid": "3105df9f-c7c7-46b8-a3ea-f438dbc1efe3",
+              "value": "تتم المشاركة من خلال الانصمام للرابط بالوقت المحدد"
+            },
+            {
+              "key": "duration",
+              "type": "text",
+              "uuid": "ebdfcc4b-4027-4c0b-a921-1af08dc91114",
+              "value": "120"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "f0964ae3-3048-45df-9442-db66f7a9ab30",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200219_200746.jpg",
+              "disabled": true
+            },
+            {
+              "key": "recovered_child_ids[]",
+              "type": "text",
+              "uuid": "222d2159-fc2e-4ba0-be02-bc6b2757f33a",
+              "value": "5"
+            },
+            {
+              "key": "join_link",
+              "type": "text",
+              "uuid": "e38548cc-b711-4dc0-a8a0-54a176e532fe",
+              "value": "https://zoom.us/j/123456"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/specialist/sessions",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "specialist",
+            "sessions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Session",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "type": "text",
+              "uuid": "feaea6a3-26f6-4a21-a87b-560f4ec5bbe2",
+              "value": "نشاط التغذية الصحية",
+              "disabled": true
+            },
+            {
+              "key": "description",
+              "type": "text",
+              "uuid": "42414fb6-f5bd-420f-8e14-99e8ce2b06f5",
+              "value": "شرح أهمية الغذاء المتوازن...",
+              "disabled": true
+            },
+            {
+              "key": "date_time",
+              "type": "text",
+              "uuid": "52400dc4-2a3d-4156-bd3d-03a75d220511",
+              "value": "2026-07-12 11:00:00"
+            },
+            {
+              "key": "type",
+              "type": "text",
+              "uuid": "7c90c966-8d98-436e-b68b-cca9fdd62959",
+              "value": "activity",
+              "disabled": true
+            },
+            {
+              "key": "session_category",
+              "type": "text",
+              "uuid": "6f1e1c62-3243-4c1a-a70e-bd28f5b2b045",
+              "value": "nutrition",
+              "disabled": true
+            },
+            {
+              "key": "target_audience",
+              "type": "text",
+              "uuid": "97d39c71-3f4c-4c5f-827c-e2eeca11d1bb",
+              "value": "child",
+              "disabled": true
+            },
+            {
+              "key": "participation_method",
+              "type": "text",
+              "uuid": "3105df9f-c7c7-46b8-a3ea-f438dbc1efe3",
+              "value": "تتم المشاركة من خلال الانصمام للرابط بالوقت المحدد",
+              "disabled": true
+            },
+            {
+              "key": "duration",
+              "type": "text",
+              "uuid": "ebdfcc4b-4027-4c0b-a921-1af08dc91114",
+              "value": "90"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "f0964ae3-3048-45df-9442-db66f7a9ab30",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200219_200746.jpg"
+            },
+            {
+              "key": "recovered_child_ids[]",
+              "type": "text",
+              "uuid": "222d2159-fc2e-4ba0-be02-bc6b2757f33a",
+              "value": "5",
+              "disabled": true
+            },
+            {
+              "key": "join_link",
+              "type": "text",
+              "uuid": "e38548cc-b711-4dc0-a8a0-54a176e532fe",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/specialist/sessions/2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "specialist",
+            "sessions",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Session",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/specialist/sessions/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "specialist",
+            "sessions",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Session Copy - Invalid Error",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "type": "text",
+              "uuid": "feaea6a3-26f6-4a21-a87b-560f4ec5bbe2",
+              "value": "جلسة التغذية الصحية"
+            },
+            {
+              "key": "description",
+              "type": "text",
+              "uuid": "42414fb6-f5bd-420f-8e14-99e8ce2b06f5",
+              "value": "شرح أهمية الغذاء المتوازن..."
+            },
+            {
+              "key": "date_time",
+              "type": "text",
+              "uuid": "52400dc4-2a3d-4156-bd3d-03a75d220511",
+              "value": "2026-06-1 10:00:00"
+            },
+            {
+              "key": "type",
+              "type": "text",
+              "uuid": "7c90c966-8d98-436e-b68b-cca9fdd62959",
+              "value": "جلسة"
+            },
+            {
+              "key": "session_category",
+              "type": "text",
+              "uuid": "6f1e1c62-3243-4c1a-a70e-bd28f5b2b045",
+              "value": "تغذية"
+            },
+            {
+              "key": "target_audience",
+              "type": "text",
+              "uuid": "97d39c71-3f4c-4c5f-827c-e2eeca11d1bb",
+              "value": "طفل "
+            },
+            {
+              "key": "participation_method",
+              "type": "text",
+              "uuid": "3105df9f-c7c7-46b8-a3ea-f438dbc1efe3",
+              "value": "تتم المشاركة من خلال الانصمام للرابط بالوقت المحدد"
+            },
+            {
+              "key": "duration",
+              "type": "text",
+              "uuid": "ebdfcc4b-4027-4c0b-a921-1af08dc91114",
+              "value": "60 دقيقة"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "f0964ae3-3048-45df-9442-db66f7a9ab30",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            },
+            {
+              "key": "recovered_child_ids[]",
+              "type": "text",
+              "uuid": "222d2159-fc2e-4ba0-be02-bc6b2757f33a",
+              "value": "2"
+            },
+            {
+              "key": "join_link",
+              "type": "text",
+              "uuid": "e38548cc-b711-4dc0-a8a0-54a176e532fe",
+              "value": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/specialist/sessions",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "specialist",
+            "sessions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View the list of recovered children on the website",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/specialist/sessions/recovered-children",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "specialist",
+            "sessions",
+            "recovered-children"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Awareness or Motivational Content (Text)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "كيفية تعامل الأهل مع أطفالهم فترة العلاج ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25"
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق علمية تساعد الاباء في التعامل مع أطفالهم",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7"
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "awareness",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            },
+            {
+              "key": "file",
+              "value": "",
+              "type": "text",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "disabled": true
+            },
+            {
+              "key": "body",
+              "value": "أثبتت الطرق العلمية .............",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Awareness or Motivational Content (File)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "اكتشاف المواهب ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25"
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق تستطيع من خلالها ولي الأمر اكتشاف مهارات طفله",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7"
+            },
+            {
+              "key": "content_type",
+              "value": "video ",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "motivational",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg",
+              "disabled": true
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "src": "/C:/Users/hp/Videos/bandicam 2023-02-17 19-58-27-335.mp4"
+            },
+            {
+              "key": "body",
+              "value": "أثبتت الطرق العلمية .............",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Awareness or Motivational Content [Errors]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "كيفية تعامل الأهل مع أطفالهم فترة العلاج ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25",
+              "disabled": true
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق علمية تساعد الاباء في التعامل مع أطفالهم",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7",
+              "disabled": true
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "توعوي",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/446632796_413247.jpg"
+            },
+            {
+              "key": "body",
+              "value": "أثبتت الطرق العلمية .............",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Awareness or Motivational Content [Errors] INVALID_FILE_TYPE and BODY_NOT_SUPPORTED",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "كيفية تعامل الأهل مع أطفالهم فترة العلاج ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25"
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق علمية تساعد الاباء في التعامل مع أطفالهم",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7"
+            },
+            {
+              "key": "content_type",
+              "value": "pdf",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "awareness ",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400012200690_537838.jpg"
+            },
+            {
+              "key": "body",
+              "value": "أثبتت الطرق العلمية .............",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Awareness or Motivational Content [Errors] FILE_NOT_SUPPORTED",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "كيفية تعامل الأهل مع أطفالهم فترة العلاج ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25"
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق علمية تساعد الاباء في التعامل مع أطفالهم",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7"
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "awareness",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            },
+            {
+              "key": "body",
+              "value": "أثبتت الطرق العلمية .............",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Awareness or Motivational Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "كيفية تعامل الأهل مع أطفالهم بعد العلاج ",
+              "type": "text",
+              "uuid": "0947eeff-a8e5-4be7-b62e-b23151bdee25"
+            },
+            {
+              "key": "description",
+              "value": "يقدم المحتوى طرق علمية تساعد الاباء في التعامل مع أطفالهم في فترة بعد العلاج",
+              "type": "text",
+              "uuid": "a37e91d4-5e8d-4753-9b10-85649e2126c7"
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "adcd61ce-1d6f-4dd9-801c-83e65758df5a"
+            },
+            {
+              "key": "content_category_type",
+              "value": "awareness",
+              "type": "text",
+              "uuid": "86a37652-d2fd-4219-b5a9-f7ba1d09db45"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "16ac4f36-3b06-4f2a-ba67-6f4bfabd8262",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/Screenshot_20220127-120227_Instagram.jpg"
+            },
+            {
+              "key": "body",
+              "type": "text",
+              "uuid": "b14fe1ee-5f0e-4236-834b-5fc3d3e38b28",
+              "value": "أثبتت الطرق العلمية أن طريقة التعامل ............."
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "124b69f8-9663-4b4a-a9f1-e1ba1781082f",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness/4",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Awareness or Motivational Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness/6",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Specialist Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "bio",
+              "value": "أخصائي نفسي متخصص في دعم الأطفال.",
+              "type": "text",
+              "uuid": "e2b36f23-94b9-43f9-b2bc-b833d0df04e4"
+            },
+            {
+              "key": "specialty",
+              "value": "نفسي",
+              "type": "text",
+              "uuid": "280193d7-aae2-45b9-a13d-af9c8a7d2ced"
+            },
+            {
+              "key": "profile_picture",
+              "value": "",
+              "type": "text",
+              "uuid": "d629f1c2-f454-428e-8aea-652789c330aa",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Settings",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/settings",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "settings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update  Settings(Parent , Donor , Admin)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "current_password",
+              "value": "123456789",
+              "type": "text",
+              "uuid": "580a9153-6019-46d1-b41c-aa742f517c34"
+            },
+            {
+              "key": "new_password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "13047602-9727-4db8-8006-3e59875106ac"
+            },
+            {
+              "key": "new_password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "90b3a55f-f17b-4cf8-b7a4-ab8d9ebffad2"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "a0939cd5-d18a-4a77-a7a6-7ac01faa7ff3",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400012200690_537838.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/settings/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "settings",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update  Settings (specialist, Recovered)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "current_password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "580a9153-6019-46d1-b41c-aa742f517c34"
+            },
+            {
+              "key": "new_password",
+              "value": "123456789",
+              "type": "text",
+              "uuid": "13047602-9727-4db8-8006-3e59875106ac"
+            },
+            {
+              "key": "new_password_confirmation",
+              "value": "123456789",
+              "type": "text",
+              "uuid": "90b3a55f-f17b-4cf8-b7a4-ab8d9ebffad2"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "a0939cd5-d18a-4a77-a7a6-7ac01faa7ff3",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/settings/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "settings",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update  Settings [Errors]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "current_password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "580a9153-6019-46d1-b41c-aa742f517c34"
+            },
+            {
+              "key": "new_password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "13047602-9727-4db8-8006-3e59875106ac"
+            },
+            {
+              "key": "new_password_confirmation",
+              "value": "1234567",
+              "type": "text",
+              "uuid": "90b3a55f-f17b-4cf8-b7a4-ab8d9ebffad2"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "a0939cd5-d18a-4a77-a7a6-7ac01faa7ff3",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/settings/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "settings",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update  Settings [Errors] Current Password Incorrect",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "current_password",
+              "value": "123456789",
+              "type": "text",
+              "uuid": "580a9153-6019-46d1-b41c-aa742f517c34"
+            },
+            {
+              "key": "new_password",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "13047602-9727-4db8-8006-3e59875106ac"
+            },
+            {
+              "key": "new_password_confirmation",
+              "value": "12345678",
+              "type": "text",
+              "uuid": "90b3a55f-f17b-4cf8-b7a4-ab8d9ebffad2"
+            },
+            {
+              "key": "",
+              "type": "file",
+              "uuid": "a0939cd5-d18a-4a77-a7a6-7ac01faa7ff3",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/settings/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "settings",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Campaign",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "ساعد طفلاً على استكمال رحلة العلاج",
+              "type": "text",
+              "uuid": "64360754-3735-48ca-ba2a-9f28a2a8029f"
+            },
+            {
+              "key": "description",
+              "value": "طفل يواجه السرطان بحاجة لدعمك لتغطية تكاليف العلاج ومواصلة.....",
+              "type": "text",
+              "uuid": "704cb401-5d97-43d6-ae2c-80fbafa7dbc6"
+            },
+            {
+              "key": "start_date",
+              "value": "01/08/2026",
+              "type": "text",
+              "uuid": "f29601cd-6c64-45dc-ada6-16fb401d37fe"
+            },
+            {
+              "key": "end_date",
+              "value": "10/8/2026",
+              "type": "text",
+              "uuid": "6e2a1569-4922-4e7e-9be3-ec24e9ed0b0c"
+            },
+            {
+              "key": "type",
+              "value": "collect_donations",
+              "type": "text",
+              "uuid": "b5959dd0-3711-4221-828c-e36f024b7b91"
+            },
+            {
+              "key": "contact_info",
+              "value": "للتواصل والاستفسار، يرجى الاتصال على الرقم:\n0591234567\nخلال ساعات العمل الرسمية من 8:00 صباحًا إلى 4:00 مساءً\nأو عبر البريد الإلكتروني:\nsupport@alam.org",
+              "type": "text",
+              "uuid": "66e44ec7-7ddb-4b3f-b045-5f5d8cadb451"
+            },
+            {
+              "key": "button_text",
+              "value": "تبرع الأن",
+              "type": "text",
+              "uuid": "24d5030d-0879-42d7-908d-b934044b197d"
+            },
+            {
+              "key": "action_link",
+              "value": "https://example.com/donation",
+              "type": "text",
+              "uuid": "642379b8-4159-47b4-a103-f63f766c8349"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "e5d82961-e36f-4560-9ea4-e103f61a7ada",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/donor/campaigns",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "donor",
+            "campaigns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Campaign [Errors]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "ساعد طفلاً على استكمال رحلة العلاج",
+              "type": "text",
+              "uuid": "64360754-3735-48ca-ba2a-9f28a2a8029f",
+              "disabled": true
+            },
+            {
+              "key": "description",
+              "value": "طفل يواجه السرطان بحاجة لدعمك لتغطية تكاليف العلاج ومواصلة.....",
+              "type": "text",
+              "uuid": "704cb401-5d97-43d6-ae2c-80fbafa7dbc6",
+              "disabled": true
+            },
+            {
+              "key": "start_date",
+              "value": "01/08/2026",
+              "type": "text",
+              "uuid": "f29601cd-6c64-45dc-ada6-16fb401d37fe"
+            },
+            {
+              "key": "end_date",
+              "value": "30/7/2026",
+              "type": "text",
+              "uuid": "6e2a1569-4922-4e7e-9be3-ec24e9ed0b0c"
+            },
+            {
+              "key": "type",
+              "value": "جمع تبرعات",
+              "type": "text",
+              "uuid": "b5959dd0-3711-4221-828c-e36f024b7b91"
+            },
+            {
+              "key": "contact_info",
+              "value": "للتواصل والاستفسار، يرجى الاتصال على الرقم:\n0591234567\nخلال ساعات العمل الرسمية من 8:00 صباحًا إلى 4:00 مساءً\nأو عبر البريد الإلكتروني:\nsupport@alam.org",
+              "type": "text",
+              "uuid": "66e44ec7-7ddb-4b3f-b045-5f5d8cadb451",
+              "disabled": true
+            },
+            {
+              "key": "button_text",
+              "value": "تبرع ",
+              "type": "text",
+              "uuid": "24d5030d-0879-42d7-908d-b934044b197d",
+              "disabled": true
+            },
+            {
+              "key": "action_link",
+              "value": "https://example.com/donation",
+              "type": "text",
+              "uuid": "642379b8-4159-47b4-a103-f63f766c8349",
+              "disabled": true
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "e5d82961-e36f-4560-9ea4-e103f61a7ada",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400012200690_537838.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/donor/campaigns",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "donor",
+            "campaigns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Campaign",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "قدّم طلب علاج لطفل مريض",
+              "type": "text",
+              "uuid": "64360754-3735-48ca-ba2a-9f28a2a8029f"
+            },
+            {
+              "key": "description",
+              "value": "قدّم بيانات الطفل لطلب المساعدة الطبية ليتم تقييم حالته وتقديم الدعم.......",
+              "type": "text",
+              "uuid": "704cb401-5d97-43d6-ae2c-80fbafa7dbc6"
+            },
+            {
+              "key": "start_date",
+              "value": "2026-08-01",
+              "type": "text",
+              "uuid": "f29601cd-6c64-45dc-ada6-16fb401d37fe"
+            },
+            {
+              "key": "end_date",
+              "value": "2026-08-15",
+              "type": "text",
+              "uuid": "6e2a1569-4922-4e7e-9be3-ec24e9ed0b0c"
+            },
+            {
+              "key": "type",
+              "value": "registration",
+              "type": "text",
+              "uuid": "b5959dd0-3711-4221-828c-e36f024b7b91"
+            },
+            {
+              "key": "contact_info",
+              "value": "للتواصل والاستفسار، يرجى الاتصال على الرقم:\n0591234567\nخلال ساعات العمل الرسمية من 8:00 صباحًا إلى 4:00 مساءً\nأو عبر البريد الإلكتروني:\nsupport@alam.org",
+              "type": "text",
+              "uuid": "66e44ec7-7ddb-4b3f-b045-5f5d8cadb451"
+            },
+            {
+              "key": "button_text",
+              "value": "انضم الان",
+              "type": "text",
+              "uuid": "24d5030d-0879-42d7-908d-b934044b197d"
+            },
+            {
+              "key": "action_link",
+              "type": "text",
+              "uuid": "642379b8-4159-47b4-a103-f63f766c8349",
+              "value": "https://example.com/donation"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "e5d82961-e36f-4560-9ea4-e103f61a7ada",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400012200690_537838.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/donor/campaigns/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "donor",
+            "campaigns",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete  Campaign",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/donor/campaigns/6",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "donor",
+            "campaigns",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add New Child",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "child_name",
+              "value": "سارة",
+              "type": "text",
+              "uuid": "43e29347-c204-4b8e-a65b-7b3e6b50a567"
+            },
+            {
+              "key": "age",
+              "value": "10",
+              "type": "text",
+              "uuid": "df256dbe-305d-4902-9f49-2b8cfeae9abd"
+            },
+            {
+              "key": "gender",
+              "value": "female",
+              "type": "text",
+              "uuid": "b1e47e3a-cd32-4f35-acb1-fc5828513e9d"
+            },
+            {
+              "key": "health_status",
+              "value": "مستقرة وتحت المتابعة الطبية المستمرة.",
+              "type": "text",
+              "uuid": "2656d8ed-7860-4cae-ab76-98063ad7e80d"
+            },
+            {
+              "key": "illness_story",
+              "value": "تم تشخيص الطفل بمرض السرطان في سن مبكرة، وبدأ رحلة العلاج منذ عدة أشهر،...",
+              "type": "text",
+              "uuid": "4b762642-3686-4552-aeab-c65310567df6"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "9d464edf-5139-44ff-a147-a055830caf62",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add New Child [Errors]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "child_name",
+              "value": "سارة",
+              "type": "text",
+              "uuid": "43e29347-c204-4b8e-a65b-7b3e6b50a567",
+              "disabled": true
+            },
+            {
+              "key": "age",
+              "value": "25",
+              "type": "text",
+              "uuid": "df256dbe-305d-4902-9f49-2b8cfeae9abd"
+            },
+            {
+              "key": "gender",
+              "value": "أنثى",
+              "type": "text",
+              "uuid": "b1e47e3a-cd32-4f35-acb1-fc5828513e9d"
+            },
+            {
+              "key": "health_status",
+              "value": "مستقرة وتحت المتابعة الطبية المستمرة.",
+              "type": "text",
+              "uuid": "2656d8ed-7860-4cae-ab76-98063ad7e80d",
+              "disabled": true
+            },
+            {
+              "key": "illness_story",
+              "value": "تم تشخيص الطفل بمرض السرطان في سن مبكرة، وبدأ رحلة العلاج منذ عدة أشهر،...",
+              "type": "text",
+              "uuid": "4b762642-3686-4552-aeab-c65310567df6",
+              "disabled": true
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "9d464edf-5139-44ff-a147-a055830caf62",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/20200220_225848.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Child",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "child_name",
+              "value": "محمد",
+              "type": "text",
+              "uuid": "43e29347-c204-4b8e-a65b-7b3e6b50a567"
+            },
+            {
+              "key": "age",
+              "value": "12",
+              "type": "text",
+              "uuid": "df256dbe-305d-4902-9f49-2b8cfeae9abd"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text",
+              "uuid": "b1e47e3a-cd32-4f35-acb1-fc5828513e9d"
+            },
+            {
+              "key": "health_status",
+              "value": "مستقرة وتحت المتابعة الطبية المستمرة.",
+              "type": "text",
+              "uuid": "2656d8ed-7860-4cae-ab76-98063ad7e80d"
+            },
+            {
+              "key": "illness_story",
+              "value": "تم تشخيص الطفل بمرض السرطان في سن مبكرة، وبدأ رحلة العلاج منذ عدة أشهر،...",
+              "type": "text",
+              "uuid": "4b762642-3686-4552-aeab-c65310567df6"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "9d464edf-5139-44ff-a147-a055830caf62",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Child",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Child Content [Text]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "قصة محمد مع العلاج",
+              "type": "text",
+              "uuid": "b03a0da4-1c35-4751-85d3-e66bf04647d2"
+            },
+            {
+              "key": "description",
+              "value": "قصة نجاح محمد..",
+              "type": "text",
+              "uuid": "366d6cc4-68f6-4510-881e-1690bcc9f7da"
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "ca704320-7690-4cb5-8f9f-70f973fbdbfd"
+            },
+            {
+              "key": "content_category_type",
+              "value": "story",
+              "type": "text",
+              "uuid": "d619478f-dd4a-4a50-8582-08e99b47d60e"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "7473d11b-a261-4af7-8019-15c4c047936d",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            },
+            {
+              "key": "body",
+              "value": "قصة تغلبي على المرض بدأت .......",
+              "type": "text",
+              "uuid": "c6f91da2-0663-486e-bde5-492d6c5b2481"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Child Content [Text] Errors",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "قصة محمد مع العلاج",
+              "type": "text",
+              "uuid": "b03a0da4-1c35-4751-85d3-e66bf04647d2",
+              "disabled": true
+            },
+            {
+              "key": "description",
+              "value": "قصة نجاح محمد..",
+              "type": "text",
+              "uuid": "366d6cc4-68f6-4510-881e-1690bcc9f7da",
+              "disabled": true
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "ca704320-7690-4cb5-8f9f-70f973fbdbfd"
+            },
+            {
+              "key": "content_category_type",
+              "value": "story",
+              "type": "text",
+              "uuid": "d619478f-dd4a-4a50-8582-08e99b47d60e",
+              "disabled": true
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "7473d11b-a261-4af7-8019-15c4c047936d",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg",
+              "disabled": true
+            },
+            {
+              "key": "body",
+              "value": "قصة تغلبي على المرض بدأت .......",
+              "type": "text",
+              "uuid": "c6f91da2-0663-486e-bde5-492d6c5b2481",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Child Content [file]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "رسمة زاهية",
+              "type": "text",
+              "uuid": "b03a0da4-1c35-4751-85d3-e66bf04647d2"
+            },
+            {
+              "key": "description",
+              "value": "رسمة  بألوان ..",
+              "type": "text",
+              "uuid": "366d6cc4-68f6-4510-881e-1690bcc9f7da"
+            },
+            {
+              "key": "content_type",
+              "value": "image",
+              "type": "text",
+              "uuid": "ca704320-7690-4cb5-8f9f-70f973fbdbfd"
+            },
+            {
+              "key": "content_category_type",
+              "value": "drawing\n",
+              "type": "text",
+              "uuid": "d619478f-dd4a-4a50-8582-08e99b47d60e"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "7473d11b-a261-4af7-8019-15c4c047936d",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "c6f91da2-0663-486e-bde5-492d6c5b2481",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Child Content [file] Errors",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "رسمة زاهية",
+              "type": "text",
+              "uuid": "b03a0da4-1c35-4751-85d3-e66bf04647d2",
+              "disabled": true
+            },
+            {
+              "key": "description",
+              "value": "رسمة  بألوان ..",
+              "type": "text",
+              "uuid": "366d6cc4-68f6-4510-881e-1690bcc9f7da",
+              "disabled": true
+            },
+            {
+              "key": "content_type",
+              "value": "image",
+              "type": "text",
+              "uuid": "ca704320-7690-4cb5-8f9f-70f973fbdbfd"
+            },
+            {
+              "key": "content_category_type",
+              "value": "drawing\n",
+              "type": "text",
+              "uuid": "d619478f-dd4a-4a50-8582-08e99b47d60e",
+              "disabled": true
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "7473d11b-a261-4af7-8019-15c4c047936d",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg",
+              "disabled": true
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "c6f91da2-0663-486e-bde5-492d6c5b2481",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Child Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "title",
+              "value": "موقف صادفني \n ",
+              "type": "text",
+              "uuid": "b03a0da4-1c35-4751-85d3-e66bf04647d2"
+            },
+            {
+              "key": "description",
+              "value": "موقف مر معي و أنا فيه أول مراحل ...........",
+              "type": "text",
+              "uuid": "366d6cc4-68f6-4510-881e-1690bcc9f7da"
+            },
+            {
+              "key": "content_type",
+              "value": "text",
+              "type": "text",
+              "uuid": "ca704320-7690-4cb5-8f9f-70f973fbdbfd"
+            },
+            {
+              "key": "content_category_type",
+              "value": "other\n",
+              "type": "text",
+              "uuid": "d619478f-dd4a-4a50-8582-08e99b47d60e"
+            },
+            {
+              "key": "cover_image",
+              "type": "file",
+              "uuid": "7473d11b-a261-4af7-8019-15c4c047936d",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400009200685_157354.jpg"
+            },
+            {
+              "key": "body",
+              "type": "text",
+              "uuid": "c6f91da2-0663-486e-bde5-492d6c5b2481",
+              "value": "عندما كنت بزيارة..."
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content/12",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content",
+            "12"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Child Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1/content/17",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1",
+            "content",
+            "17"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View Full Child Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/parent/children/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "parent",
+            "children",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Handle Invitation(Accept /decline) or undo(status --> sent)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "status",
+              "value": "declined",
+              "type": "text",
+              "uuid": "785b7897-f514-45e2-b817-d9ee67a09284",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "accepted",
+              "type": "text",
+              "uuid": "d557cad5-3a61-4421-be97-afcf8df5b17e"
+            },
+            {
+              "key": "status",
+              "value": "sent",
+              "type": "text",
+              "uuid": "f1f161a4-a9d0-4ae2-aa7e-570a7cb19cf3",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/invitations/1/handle",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "invitations",
+            "1",
+            "handle"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Invitation",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/all-invitations",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "all-invitations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All contents",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/all-contents",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "all-contents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All sessions",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/all-sessions",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "all-sessions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Recovered Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "age",
+              "value": "14",
+              "type": "text",
+              "uuid": "b29302ff-b49a-4a0f-a1f2-658e4981bf6a"
+            },
+            {
+              "key": "cancer_type",
+              "value": "لوكيميا",
+              "type": "text",
+              "uuid": "2d292040-ff21-4b26-aaf7-bfa36539d22f"
+            },
+            {
+              "key": "recovery_date",
+              "value": "2024-05-10",
+              "type": "text",
+              "uuid": "9c362540-defd-4145-baf5-5e5c4e4e20c9"
+            },
+            {
+              "key": "recovery_duration",
+              "value": "8 أشهر",
+              "type": "text",
+              "uuid": "f5756da9-71fe-4240-9075-4a6ce747d540"
+            },
+            {
+              "key": "location",
+              "value": "غزة - فلسطين",
+              "type": "text",
+              "uuid": "72fb9044-65eb-4c87-b472-b7ff05fab61c"
+            },
+            {
+              "key": "recovery_story",
+              "value": "بدأت قصة مرضي و انتهت......",
+              "type": "text",
+              "uuid": "0a5aa79f-50fe-4659-9fd4-5df0e066d840"
+            },
+            {
+              "key": "profile_picture",
+              "type": "file",
+              "uuid": "7cfb9d45-807b-48be-8d9e-d8e7f28f85a2",
+              "src": "/C:/Users/hp/Pictures/Jerusalem/400016300161_198677.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "profile",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Toggle Like(Like , Unlike)- type in (session, awareness_content, child_content) [All User except Donor]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/{type}/{id}/like",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "{type}",
+            "{id}",
+            "like"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Toggle Like(Like , Unlike)- type in (campaign) [Donor and Parent]",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/campaign/1/like",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "campaign",
+            "1",
+            "like"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Toggle Like(Like , Unlike) parent with child's Interaction",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/child_content/11/like?child_id=2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "child_content",
+            "11",
+            "like"
+          ],
+          "query": [
+            {
+              "key": "child_id",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Parent Interaction Options",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/child_content/12/options",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "child_content",
+            "12",
+            "options"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Store Comment",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "comment_text",
+              "value": "هذا جلسة رائعة",
+              "type": "text",
+              "uuid": "08f4c453-1d7d-4fad-8d39-67ccccddb42e"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/{type}/{id}/comment",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "{type}",
+            "{id}",
+            "comment"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get  Comments",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/interact/{type}/{id}/comments",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "interact",
+            "{type}",
+            "{id}",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Child contents Page",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/child-contents",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "child-contents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Awareness and Motivational Contents Page",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/awareness",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "awareness"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Campaigns Page",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/campaigns",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "campaigns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Sessions and Activities Page",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/session",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "session"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Control Panel",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/dashboard",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "dashboard"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Action Show Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/actions/show/{type}/{id}",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "actions",
+            "show",
+            "{type}",
+            "{id}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Show Child_Content Meta",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/actions/meta/child-content/11",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "actions",
+            "meta",
+            "child-content",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Action Approve Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/actions/approve/{type}/{id}",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "actions",
+            "approve",
+            "{type}",
+            "{id}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Action Approve Child Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "points",
+              "value": "13",
+              "type": "text",
+              "uuid": "5af79304-47de-4024-b6be-0869dfa74adf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/actions/approve/child_content/11",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "actions",
+            "approve",
+            "child_content",
+            "11"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Action Reject Content",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/actions/reject/{type}/{id}",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "actions",
+            "reject",
+            "{type}",
+            "{id}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Get Users",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/users",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin toggle User's Account Status",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/users/5/toggle-status",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "users",
+            "5",
+            "toggle-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get System Setting",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/system/settings",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "system",
+            "settings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Update System Setting",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "phone",
+              "value": "+970 59 123 4567",
+              "type": "text",
+              "uuid": "b623cbe7-1c8a-462c-a014-632d3fc47b94"
+            },
+            {
+              "key": "support_email",
+              "value": "healingjourney",
+              "type": "text",
+              "uuid": "42e1bf5b-63fc-4555-aa5c-bd82981a793c"
+            },
+            {
+              "key": "facebook_url",
+              "value": "https://facebook.com/healingjourney",
+              "type": "text",
+              "uuid": "a3c7297c-20da-41c3-a599-59abfc7f8173"
+            },
+            {
+              "key": "instagram_url",
+              "value": "https://instagram.com/healingjourney",
+              "type": "text",
+              "uuid": "d5616e3a-8cab-4652-a713-763ca99fee12"
+            },
+            {
+              "key": "address",
+              "value": "غزة - فلسطين",
+              "type": "text",
+              "uuid": "1db28589-4b31-450c-bc21-13ae703cdacd"
+            },
+            {
+              "key": "linkedin_url",
+              "value": "https://linkedin.com/company/healingjourney",
+              "type": "text",
+              "uuid": "f8efcb9a-95e8-4b73-a8aa-8df325f1cea4"
+            },
+            {
+              "key": "footer_text",
+              "value": "© ٢٠٢٦ – رحلة شفاء. جميع الحقوق محفوظة",
+              "type": "text",
+              "uuid": "6f81942b-868b-4916-95a6-f922aa21c6e0"
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "6b08a53b-b4d1-4d6f-aba5-eb5f628a0811",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/system/settings/update",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "system",
+            "settings",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Get Categories",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/categories",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Add New Category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "المحتوى التعليمي",
+              "type": "text",
+              "uuid": "b212330d-d021-489c-85fa-6582343d64f3"
+            },
+            {
+              "key": "is_active",
+              "value": "1",
+              "type": "text",
+              "uuid": "0a64acab-275d-4f2e-89de-cca53ec655d7"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/categories",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Update Category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "المحتوى التوعوي",
+              "type": "text",
+              "uuid": "b212330d-d021-489c-85fa-6582343d64f3"
+            },
+            {
+              "key": "is_active",
+              "value": "1",
+              "type": "text",
+              "uuid": "0a64acab-275d-4f2e-89de-cca53ec655d7"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/categories/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "categories",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Delete Category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/categories/7",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "categories",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin toggle-status Category",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/categories/6/toggle-status",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "categories",
+            "6",
+            "toggle-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin view Messages",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/messages",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Send Message to admin in contact Us Page",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "شهد",
+              "type": "text",
+              "uuid": "b9af67e5-ad45-4ba9-8877-7f9a74b1513e"
+            },
+            {
+              "key": "email",
+              "value": "shahed@gmail.com",
+              "type": "text",
+              "uuid": "3f02f9a9-8841-435a-ad62-54289d805d36"
+            },
+            {
+              "key": "subject",
+              "value": " معرفة ....",
+              "type": "text",
+              "uuid": "c987c896-2c15-445d-8a87-f339e7efe5af"
+            },
+            {
+              "key": "message",
+              "value": "أريد معرفة ......",
+              "type": "text",
+              "uuid": "16ec9fbb-f099-4f86-850d-20155a1f90a3"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/contact",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "contact"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin reply to Message",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "reply_text",
+              "value": "سأرفق لك.....",
+              "type": "text",
+              "uuid": "b9af67e5-ad45-4ba9-8877-7f9a74b1513e"
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "3f02f9a9-8841-435a-ad62-54289d805d36",
+              "disabled": true
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "c987c896-2c15-445d-8a87-f339e7efe5af",
+              "disabled": true
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "16ec9fbb-f099-4f86-850d-20155a1f90a3",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/admin/messages/1/reply",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "admin",
+            "messages",
+            "1",
+            "reply"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{admin_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/logout",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/logout",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
