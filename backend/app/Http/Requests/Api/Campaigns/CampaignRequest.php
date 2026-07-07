@@ -14,7 +14,9 @@ class CampaignRequest extends FormRequest
 
     public function rules(): array
     {
-        $isUpdate = $this->isMethod('put') || $this->isMethod('patch');
+        $isUpdate = $this->isMethod('put')
+            || $this->isMethod('patch')
+            || ($this->isMethod('post') && $this->route('id'));
 
         return [
             'cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:5120'],
@@ -27,10 +29,17 @@ class CampaignRequest extends FormRequest
             // إضافة الحقول الجديدة
             'type'         => [$isUpdate ? 'sometimes' : 'required', Rule::in(['collect_donations', 'registration'])],
             'button_text'  => ['nullable', 'string', 'max:50'],
-            'action_link'  => ['nullable', 'url'],
+            'action_link'  => ['nullable', 'string', 'max:500'],
             'contact_info' => [$isUpdate ? 'sometimes' : 'required', 'string'],
             'category_id'  => ['nullable', 'exists:categories,id'],
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        if ($this->has('action_link') && $this->input('action_link') === '') {
+            $this->merge(['action_link' => null]);
+        }
     }
 
     public function messages(): array

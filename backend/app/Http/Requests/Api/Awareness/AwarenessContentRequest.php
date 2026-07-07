@@ -37,12 +37,12 @@ class AwarenessContentRequest extends FormRequest
             'file' => [
                 $isUpdate ? 'nullable' : 'required_unless:content_type,text',
                 'file',
-                'max:10240',
+                Rule::when($this->content_type === 'video', 'max:51200', 'max:10240'),
 
                 Rule::prohibitedIf($this->content_type === 'text' && $this->hasFile('file')),
                 Rule::when($this->content_type === 'pdf', 'mimes:pdf'),
                 Rule::when($this->content_type === 'image', 'mimes:jpeg,png,jpg,webp'),
-                Rule::when($this->content_type === 'video', 'mimes:mp4,mov,avi,wmv'),
+                Rule::when($this->content_type === 'video', 'mimes:mp4,mov,avi,wmv,webm,m4v'),
             ]
         ];
     }
@@ -58,10 +58,14 @@ class AwarenessContentRequest extends FormRequest
             'description.required'          => 'وصف المحتوى مطلوب.',
             'content_type.in'               => 'نوع المحتوى غير صحيح.',
             'content_category_type.in'      => 'تصنيف المحتوى يجب أن يكون توعوياً أو تحفيزياً.',
-            'file.max'                      => 'حجم الملف الأساسي يجب ألا يتجاوز 10 ميجابايت.',
+            'file.max'                      => $this->content_type === 'video'
+                ? 'حجم ملف الفيديو يجب ألا يتجاوز 50 ميجابايت.'
+                : 'حجم الملف الأساسي يجب ألا يتجاوز 10 ميجابايت.',
             'cover_image.image'             => 'يجب أن يكون ملف الغلاف صورة.',
             'cover_image.max'               => 'حجم صورة الغلاف يجب ألا يتجاوز 5 ميجابايت.',
-            'file.mimes' => 'صيغة الملف غير متوافقة مع نوع المحتوى المختار.',
+            'file.mimes' => $this->content_type === 'video'
+                ? 'صيغة الفيديو المدعومة: MP4, MOV, AVI, WMV, WEBM.'
+                : 'صيغة الملف غير متوافقة مع نوع المحتوى المختار.',
             'file.required_unless' => 'يجب إرفاق ملف لهذا النوع من المحتوى.',
         ];
     }

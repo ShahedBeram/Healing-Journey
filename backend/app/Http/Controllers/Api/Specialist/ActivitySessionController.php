@@ -39,7 +39,7 @@ class ActivitySessionController extends Controller
                     Invitation::create([
                         'session_id' => $session->id,
                         'recovered_child_id' => $childId,
-                        'status' => 'pending'
+                        'status' => 'sent'
                     ]);
                 }
             }

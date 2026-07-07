@@ -206,8 +206,9 @@ class InteractionController extends Controller
             ->map(function ($comment) {
                 return [
                     'name' => $comment->user->full_name,
+                    'avatar' => $comment->user->profile_picture,
                     'comment' => $comment->comment_text,
-                    'time' => $comment->created_at->format('Y-m-d H:i'), // أو diffForHumans()
+                    'time' => $comment->created_at->format('Y-m-d H:i'),
                 ];
             });
 

@@ -54,7 +54,10 @@ class ProfileController extends Controller
                 $profile = $user->specialistProfile;
                 $data['details'] = $profile ? [
                     'profile'  => $profile,
-                    'contents' => $profile ? $profile->contents()->latest()->paginate(3) : [],
+                    'contents' => $profile ? $profile->contents()
+                        ->with(['category:id,slug', 'motivationalDetails'])
+                        ->latest()
+                        ->paginate(12) : [],
                     'sessions' => $profile ? $profile->sessions()->latest()->paginate(3) : []
                 ] : null;
                 break;
@@ -81,7 +84,10 @@ class ProfileController extends Controller
                 //  استدعاء العلاقة من $profile (وليس من $user)
                 $data['details'] = [
                     'profile'     => $profile,
-                    'contents'    => $profile->contents()->latest()->paginate(3),
+                    'contents'    => $profile->contents()
+                        ->with(['category:id,slug', 'motivationalDetails'])
+                        ->latest()
+                        ->paginate(3),
 
                     //  استدعاء joinedSessions من البروفايل نفسه
                     'sessions'    => $profile->joinedSessions()->latest('id')->paginate(3),
@@ -194,12 +200,36 @@ class ProfileController extends Controller
                 ->paginate(3)
         );
     }
-    //  جلب كل المحتوى
+    //   جلب كل المحتوى
     public function getAllContents(Request $request)
     {
-        $profile = $request->user()->recoveredChildProfile;
-        // تعيد المحتوى بنظام pagination 
-        return response()->json($profile->contents()->latest()->paginate(6));
+        $user = $request->user();
+
+        if ($user->user_type === 'specialist') {
+            $profile = $user->specialistProfile;
+            if (!$profile) {
+                return response()->json(['data' => []]);
+            }
+
+            return response()->json(
+                $profile->contents()
+                    ->with(['category:id,slug', 'motivationalDetails'])
+                    ->latest()
+                    ->paginate(6)
+            );
+        }
+
+        $profile = $user->recoveredChildProfile;
+        if (!$profile) {
+            return response()->json(['data' => []]);
+        }
+
+        return response()->json(
+            $profile->contents()
+                ->with(['category:id,slug', 'motivationalDetails'])
+                ->latest()
+                ->paginate(6)
+        );
     }
 
     //   جلب كل الجلسات

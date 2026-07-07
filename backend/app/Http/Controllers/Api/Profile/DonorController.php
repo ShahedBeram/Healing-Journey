@@ -23,8 +23,6 @@ class DonorController extends Controller
 
         $data = $request->validated();
 
-        $data = $request->validated();
-
         $data['cover_image'] = null;
 
         if ($request->hasFile('cover_image')) {

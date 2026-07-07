@@ -46,7 +46,7 @@ class AwarenessMotivationalController extends Controller
 
             AwarenessMotivationalContent::create([
                 'content_id' => $content->id,
-                'category'   => $data['content_category_type']
+                'content_category_type' => $data['content_category_type'],
             ]);
             $content->load('motivationalDetails');
             return response()->json(['message' => 'تم إرسال المحتوى للمراجعة بنجاح', 'data' => $content], 201);
@@ -89,7 +89,7 @@ class AwarenessMotivationalController extends Controller
 
             $content->update($updateData);
 
-            $details->update(['category' => $data['content_category_type']]);
+            $details->update(['content_category_type' => $data['content_category_type']]);
 
             return response()->json(['message' => 'تم تحديث المحتوى وإعادة إرساله للمراجعة', 'data' => $content]);
         });

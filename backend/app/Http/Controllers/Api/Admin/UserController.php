@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $query = User::query()
-            ->select('id', 'full_name', 'email')
+            ->select('id', 'full_name', 'email', 'account_status')
             ->whereIn('account_status', ['pending', 'approved']);
 
         // البحث بالاسم أو البريد الإلكتروني

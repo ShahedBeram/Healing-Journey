@@ -46,7 +46,11 @@ class DashboardController extends Controller
             return now()->subMonths($i)->format('Y-m');
         })->reverse();
 
-        $chartData = $months->map(function ($month) {
+        $monthExpression = DB::connection()->getDriverName() === 'sqlite'
+            ? "strftime('%Y-%m', created_at)"
+            : "DATE_FORMAT(created_at, '%Y-%m')";
+
+        $chartData = $months->map(function ($month) use ($monthExpression) {
 
             $total = DB::table(DB::raw("(
         SELECT created_at, (likes_count + comments_count) as total FROM contents
@@ -55,7 +59,7 @@ class DashboardController extends Controller
         UNION ALL
         SELECT created_at, (likes_count + comments_count) as total FROM activity_sessions
     ) as all_interactions"))
-                ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [$month])
+                ->whereRaw("{$monthExpression} = ?", [$month])
                 ->sum('total');
 
             return [
