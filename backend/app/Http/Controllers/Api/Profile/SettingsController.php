@@ -51,8 +51,8 @@ class SettingsController extends Controller
             'email' => ['sometimes', 'email', Rule::unique('users')->ignore($user->id)],
             'phone' => 'nullable|string',
             'job_title' => 'nullable|string',
-            'current_password' => 'required_with:new_password',
-            'new_password' => 'nullable|min:8|confirmed',
+            'current_password' => 'required_with:new_password|string',
+            'new_password' => 'nullable|string|min:6|confirmed',
         ];
 
         // 3. التحقق الصارم من الصورة
@@ -65,7 +65,14 @@ class SettingsController extends Controller
             }
         }
 
-        $request->validate($rules);
+        $request->validate($rules, [
+            'current_password.required_with' => 'يرجى إدخال كلمة المرور الحالية.',
+            'new_password.min' => 'كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل.',
+            'new_password.confirmed' => 'كلمة المرور الجديدة وتأكيدها غير متطابقين.',
+            'email.unique' => 'البريد الإلكتروني مستخدم مسبقاً.',
+            'profile_picture.image' => 'يجب أن تكون الصورة الشخصية من نوع صورة.',
+            'profile_picture.max' => 'حجم الصورة الشخصية يجب ألا يتجاوز 2 ميجابايت.',
+        ]);
 
         // 4. تحديث البيانات الأساسية
         $user->fill($request->only(['full_name', 'email', 'phone', 'job_title']));
