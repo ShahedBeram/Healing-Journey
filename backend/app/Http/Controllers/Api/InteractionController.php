@@ -28,9 +28,10 @@ class InteractionController extends Controller
     // =========================
     // Resolve correct model
     // =========================
+
     private function resolveModel($type, $id)
     {
-        return match ($type) {
+        $model = match ($type) {
 
             // كلهم بيرجعوا نفس المحتوى الأساسي
             'content',
@@ -43,6 +44,20 @@ class InteractionController extends Controller
 
             default => throw new \Exception("نوع غير مدعوم"),
         };
+
+
+        // =========================
+        // Allow interaction only for approved items
+        // =========================
+        if (isset($model->status) && $model->status !== 'approved') {
+
+            abort(response()->json([
+                'message' => 'لا يمكن التفاعل مع محتوى غير معتمد'
+            ], 403));
+        }
+
+
+        return $model;
     }
 
     // =========================

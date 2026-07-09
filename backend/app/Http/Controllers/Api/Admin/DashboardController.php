@@ -16,14 +16,17 @@ class DashboardController extends Controller
     {
         // 1. الإحصائيات (الأرقام العلوية)
         $stats = [
-            'awarness&motivationalContents_sessions' => Content::whereHas('motivationalDetails')
+
+            'awarness&motivationalContents_sessions' =>
+            Content::whereHas('motivationalDetails')
+                ->where('status', 'approved')
                 ->count()
                 +
-                ActivitySession::count(),
+                ActivitySession::where('status', 'approved')->count(),
 
             'child_profiles' => \App\Models\ChildProfile::count(),
 
-            'donation_campaigns' => DonationCampaign::count(),
+            'donation_campaigns' => DonationCampaign::where('status', 'approved')->count(),
 
             'parents' => User::where('user_type', 'parent')->count(),
         ];

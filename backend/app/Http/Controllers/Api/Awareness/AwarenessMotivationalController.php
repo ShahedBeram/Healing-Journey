@@ -56,7 +56,7 @@ class AwarenessMotivationalController extends Controller
     /**
      * تحديث المحتوى
      */
-    public function update(AwarenessContentRequest $request, $contentId)
+ /*   public function update(AwarenessContentRequest $request, $contentId)
     {
         $content = Content::findOrFail($contentId);
         $details = AwarenessMotivationalContent::where('content_id', $contentId)->firstOrFail();
@@ -93,8 +93,179 @@ class AwarenessMotivationalController extends Controller
 
             return response()->json(['message' => 'تم تحديث المحتوى وإعادة إرساله للمراجعة', 'data' => $content]);
         });
-    }
+    }*/
+    /**
+     * تحديث المحتوى
+     */
+    /*public function update(AwarenessContentRequest $request, $contentId)
+    {
+        $content = Content::findOrFail($contentId);
+        $details = AwarenessMotivationalContent::where('content_id', $contentId)->firstOrFail();
 
+        $data = $request->validated();
+
+        // إزالة الملفات الخام من الـ array، لأننا رح نتعامل معها يدوياً
+        // (منعاً لتسرب UploadedFile objects لـ $content->update())
+        unset($data['file'], $data['cover_image']);
+
+        // النوع/التصنيف الفعلي: لو ما انبعت بالـ request، نحافظ على القيمة الحالية
+        $categoryType = $data['content_category_type'] ?? $details->content_category_type;
+        $category = Category::where('slug', $categoryType)->firstOrFail();
+
+        return DB::transaction(function () use ($request, $content, $details, $data, $category, $categoryType) {
+
+            // 1. التعامل مع الملف الأساسي (file)
+            // إذا أرسل المستخدم ملفاً جديداً أو طلب حذف الملف الحالي
+            if ($request->hasFile('file') || $request->boolean('remove_file')) {
+
+                // حذف الملف القديم فيزيائياً من السيرفر
+                if ($content->getRawOriginal('file_path')) {
+                    Storage::disk('public')->delete($content->getRawOriginal('file_path'));
+                }
+
+                // إذا كان هناك ملف جديد يتم رفعه، وإلا نجعله null
+                if ($request->hasFile('file')) {
+                    $data['file_path'] = $request->file('file')->store('awareness_files', 'public');
+                } else {
+                    $data['file_path'] = null;
+                }
+            }
+            // لو ما فيه ملف جديد ولا طلب حذف => ما منلمس file_path إطلاقاً، بيضل القديم
+
+            // 2. التعامل مع صورة الغلاف (cover_image)
+            if ($request->hasFile('cover_image')) {
+                if ($content->getRawOriginal('cover_image')) {
+                    Storage::disk('public')->delete($content->getRawOriginal('cover_image'));
+                }
+                $data['cover_image'] = $request->file('cover_image')->store('awareness_covers', 'public');
+            }
+
+            // 3. تجهيز بيانات التحديث
+            $updateData = array_merge($data, [
+                'status'      => 'pending',
+                'category_id' => $category->id,
+            ]);
+
+            // 4. تنفيذ التحديث
+            $content->update($updateData);
+
+            $details->update([
+                'content_category_type' => $categoryType,
+            ]);
+
+            return response()->json([
+                'message' => 'تم تحديث المحتوى وإعادة إرساله للمراجعة',
+                'data'    => $content->fresh(),
+            ]);
+        });
+    }*/
+    /**
+     * تحديث المحتوى
+     */
+    public function update(AwarenessContentRequest $request, $contentId)
+    {
+        $content = Content::findOrFail($contentId);
+        $details = AwarenessMotivationalContent::where('content_id', $contentId)->firstOrFail();
+
+        $data = $request->validated();
+
+        // إزالة الملفات من البيانات قبل update
+        unset($data['file'], $data['cover_image']);
+
+        // الحفاظ على القيم الحالية إذا لم ترسل في الطلب
+        $categoryType = $data['content_category_type'] ?? $details->content_category_type;
+
+        $category = Category::where('slug', $categoryType)->firstOrFail();
+
+        return DB::transaction(function () use (
+            $request,
+            $content,
+            $details,
+            $data,
+            $category,
+            $categoryType
+        ) {
+
+            /*
+        |--------------------------------------------------------------------------
+        | التعامل مع الملف الأساسي
+        |--------------------------------------------------------------------------
+        */
+
+            // حذف الملف القديم فقط عند وجود remove_file
+            if ($request->boolean('remove_file')) {
+
+                if ($content->getRawOriginal('file_path')) {
+                    Storage::disk('public')->delete(
+                        $content->getRawOriginal('file_path')
+                    );
+                }
+
+                $data['file_path'] = null;
+            }
+
+
+            // رفع ملف جديد (مع استبدال القديم)
+            if ($request->hasFile('file')) {
+
+                if ($content->getRawOriginal('file_path')) {
+                    Storage::disk('public')->delete(
+                        $content->getRawOriginal('file_path')
+                    );
+                }
+
+                $data['file_path'] = $request
+                    ->file('file')
+                    ->store('awareness_files', 'public');
+            }
+
+
+            /*
+        |--------------------------------------------------------------------------
+        | التعامل مع صورة الغلاف
+        |--------------------------------------------------------------------------
+        */
+
+            if ($request->hasFile('cover_image')) {
+
+                if ($content->getRawOriginal('cover_image')) {
+                    Storage::disk('public')->delete(
+                        $content->getRawOriginal('cover_image')
+                    );
+                }
+
+                $data['cover_image'] = $request
+                    ->file('cover_image')
+                    ->store('awareness_covers', 'public');
+            }
+
+
+            /*
+        |--------------------------------------------------------------------------
+        | تحديث البيانات
+        |--------------------------------------------------------------------------
+        */
+
+            $updateData = array_merge($data, [
+                'status'      => 'pending',
+                'category_id' => $category->id,
+            ]);
+
+
+            $content->update($updateData);
+
+
+            $details->update([
+                'content_category_type' => $categoryType,
+            ]);
+
+
+            return response()->json([
+                'message' => 'تم تحديث المحتوى وإعادة إرساله للمراجعة',
+                'data'    => $content->fresh(),
+            ]);
+        });
+    }
     /**
      * حذف المحتوى
      */
