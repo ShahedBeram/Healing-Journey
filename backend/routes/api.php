@@ -37,7 +37,6 @@ Route::get('system/settings', [SettingsController::class, 'getSystemSettings']);
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::post('/settings/update', [SettingsController::class, 'updateGeneralSettings']);
 

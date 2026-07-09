@@ -19,13 +19,19 @@ class HomeController extends Controller
             'beneficiaries' => ChildProfile::count(),
 
             // 2. المحتوى التوعوي + الجلسات (المجموع)
-            'awareness_and_sessions' => AwarenessMotivationalContent::count() + ActivitySession::count(),
+            'awareness_and_sessions' =>
+            AwarenessMotivationalContent::whereHas('content', function ($q) {
+                $q->where('status', 'approved');
+            })->count() +
+                ActivitySession::where('status', 'approved')->count(),
 
             // 3. حملات التبرع
-            'campaigns' => DonationCampaign::count(),
+            'campaigns' => DonationCampaign::where('status', 'approved')->count(),
 
             // 4. محتوى الأطفال
-            'children_content' => ChildContent::count(),
+            'children_content' => ChildContent::whereHas('content', function ($query) {
+                $query->where('status', 'approved');
+            })->count(),
         ];
 
         // 3 قصص نجاح حديثة

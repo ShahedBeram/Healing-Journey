@@ -60,17 +60,48 @@ class ChildController extends Controller
         $child->update($validatedData);
         return response()->json(['message' => 'تم تحديث بيانات الطفل بنجاح', 'child' => $child]);
     }
-
-    //  حذف الطفل
+    // حذف الطفل ومحتواه
     public function destroy(Request $request, $id)
     {
+        // 1. جلب الطفل
         $child = $request->user()->parentProfile->children()->findOrFail($id);
-        if ($child->getRawOriginal('profile_picture')) {
-            Storage::disk('public')
-                ->delete($child->getRawOriginal('profile_picture'));
-        }
-        $child->delete();
-        return response()->json(['message' => 'تم حذف الطفل بنجاح']);
+
+        return DB::transaction(function () use ($child) {
+
+            // 2. جلب جميع سجلات الـ ChildContent المرتبطة بهذا الطفل
+            $childContents = ChildContent::where('child_profile_id', $child->id)->get();
+
+            foreach ($childContents as $childContent) {
+                // الوصول للمحتوى الأساسي
+                $content = $childContent->content;
+
+                if ($content) {
+                    // حذف الملفات من التخزين (Storage) إذا وجدت
+                    if ($content->getRawOriginal('file_path')) {
+                        Storage::disk('public')->delete($content->getRawOriginal('file_path'));
+                    }
+                    if ($content->getRawOriginal('cover_image')) {
+                        Storage::disk('public')->delete($content->getRawOriginal('cover_image'));
+                    }
+
+                    // حذف المحتوى الأساسي
+                    $content->delete();
+                }
+
+                // حذف سجل الـ ChildContent
+                $childContent->delete();
+            }
+
+            // 3. حذف صورة الطفل الشخصية من التخزين
+            if ($child->getRawOriginal('profile_picture')) {
+                Storage::disk('public')->delete($child->getRawOriginal('profile_picture'));
+            }
+
+            // 4. حذف الطفل نفسه
+            $child->delete();
+
+            return response()->json(['message' => 'تم حذف الطفل وجميع محتوياته بنجاح']);
+        });
     }
 
     // إنشاء محتوى طفل 

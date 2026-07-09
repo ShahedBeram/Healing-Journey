@@ -75,7 +75,8 @@ class DashboardController extends Controller
             'sessions'  => ActivitySession::query()->select('id', 'title', 'status', 'created_at', DB::raw("'جلسات وأنشطة' as category_label"), DB::raw("'session' as type")),
             'child_content' => Content::whereHas('childContentDetails')->select('id', 'title', 'status', 'created_at', DB::raw("'محتوى أطفال' as category_label"), DB::raw("'child_content' as type")),
             'awareness' => Content::whereHas('motivationalDetails')->select('id', 'title', 'status', 'created_at', DB::raw("'محتوى توعوي وتحفيزي' as category_label"), DB::raw("'awareness_content' as type")),
-            default => Content::select('id', 'title', 'status', 'created_at', DB::raw("'محتوى عام' as category_label"), DB::raw("'content' as type"))
+            default => Content::whereHas('motivationalDetails')->select('id', 'title', 'status', 'created_at', DB::raw("'محتوى توعوي وتحفيزي' as category_label"), DB::raw("'awareness_content' as type"))
+                ->unionAll(Content::whereHas('childContentDetails')->select('id', 'title', 'status', 'created_at', DB::raw("'محتوى أطفال' as category_label"), DB::raw("'child_content' as type")))
                 ->unionAll(DonationCampaign::select('id', 'title', 'status', 'created_at', DB::raw("'حملات تبرع' as category_label"), DB::raw("'campaign' as type")))
                 ->unionAll(ActivitySession::select('id', 'title', 'status', 'created_at', DB::raw("'جلسات وأنشطة' as category_label"), DB::raw("'session' as type")))
         };
