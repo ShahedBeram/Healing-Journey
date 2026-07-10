@@ -58,7 +58,7 @@ class ProfileController extends Controller
                         ->with(['category:id,slug', 'motivationalDetails'])
                         ->latest()
                         ->paginate(12) : [],
-                    'sessions' => $profile ? $profile->sessions()->latest()->paginate(3) : []
+                    'sessions' => $profile ? $profile->sessions()->latest()->paginate(10) : []
                 ] : null;
                 break;
 
@@ -67,7 +67,7 @@ class ProfileController extends Controller
                 $profile = $user->donorProfile;
                 $data['details'] = $profile ? [
                     'profile'   => $profile,
-                    'campaigns' => $profile ? $profile->campaigns()->latest()->paginate(3) : []
+                    'campaigns' => $profile ? $profile->campaigns()->latest()->paginate(10) : []
                 ] : null;
                 break;
 

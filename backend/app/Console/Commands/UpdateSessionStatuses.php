@@ -24,12 +24,12 @@ class UpdateSessionStatuses extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    /*  public function handle()
     {
         $now = now();
 
         // 1. تحويل المقبولة لـ جارية (كما هي)
-        ActivitySession::where('status', 'accepted')
+        ActivitySession::where('status', 'approved')
             ->where('date_time', '<=', $now)
             ->update(['status' => 'ongoing']);
 
@@ -39,5 +39,28 @@ class UpdateSessionStatuses extends Command
             ->update(['status' => 'completed']);
 
         $this->info('تم تحديث الحالات بدقة بناءً على مدة كل جلسة.');
+    }*/
+    public function handle()
+    {
+        $now = now();
+
+        // تحويل الجلسة من approved إلى ongoing أثناء وقتها
+        ActivitySession::where('status', 'approved')
+            ->where('date_time', '<=', $now)
+            ->whereRaw("DATE_ADD(date_time, INTERVAL duration MINUTE) > ?", [$now])
+            ->update([
+                'status' => 'ongoing'
+            ]);
+
+
+        // تحويل الجلسة إلى completed بعد انتهاء المدة
+        ActivitySession::whereIn('status', ['approved', 'ongoing'])
+            ->whereRaw("DATE_ADD(date_time, INTERVAL duration MINUTE) <= ?", [$now])
+            ->update([
+                'status' => 'completed'
+            ]);
+
+
+        $this->info('تم تحديث حالات الجلسات.');
     }
 }

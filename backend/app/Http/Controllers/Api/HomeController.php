@@ -26,7 +26,7 @@ class HomeController extends Controller
                 ActivitySession::where('status', 'approved')->count(),
 
             // 3. حملات التبرع
-            'campaigns' => DonationCampaign::where('status', 'approved')->count(),
+            'campaigns' => DonationCampaign::where('status', 'active')->count(),
 
             // 4. محتوى الأطفال
             'children_content' => ChildContent::whereHas('content', function ($query) {

@@ -13,7 +13,7 @@ class CampaignController extends Controller
         $campaigns = DonationCampaign::query()
             ->whereNotIn('status', ['pending', 'rejected'])
             ->latest()
-            ->paginate(4);
+            ->paginate(20);
 
         return response()->json([
             'success' => true,

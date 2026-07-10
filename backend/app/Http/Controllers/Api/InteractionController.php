@@ -46,13 +46,11 @@ class InteractionController extends Controller
         };
 
 
-        // =========================
-        // Allow interaction only for approved items
-        // =========================
-        if (isset($model->status) && $model->status !== 'approved') {
+        // الطريقة الصحيحة: يجب أن تكون الحالة ليست 'approved' AND ليست 'active'
+        if (isset($model->status) && $model->status !== 'approved' && $model->status !== 'active') {
 
             abort(response()->json([
-                'message' => 'لا يمكن التفاعل مع محتوى غير معتمد'
+                'message' => 'لا يمكن التفاعل مع محتوى غير معتمد أو غير نشط'
             ], 403));
         }
 

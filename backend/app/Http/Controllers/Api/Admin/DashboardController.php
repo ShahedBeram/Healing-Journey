@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
             'child_profiles' => \App\Models\ChildProfile::count(),
 
-            'donation_campaigns' => DonationCampaign::where('status', 'approved')->count(),
+            'donation_campaigns' => DonationCampaign::where('status', 'active')->count(),
 
             'parents' => User::where('user_type', 'parent')->count(),
         ];

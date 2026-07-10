@@ -10,3 +10,5 @@ Artisan::command('inspire', function () {
 
 
 Schedule::command('campaigns:update-expired')->daily();
+Schedule::command('app:update-session-statuses')
+    ->everyMinute();

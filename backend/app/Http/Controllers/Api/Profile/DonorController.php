@@ -10,11 +10,6 @@ use App\Models\Category;
 
 class DonorController extends Controller
 {
-    // عرض الحملات
-    /*   public function index(Request $request)
-    {
-        return $request->user()->donorProfile->campaigns()->latest()->paginate(3);
-    }*/
 
     // إنشاء الحملة 
     public function store(CampaignRequest $request)
