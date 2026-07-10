@@ -55,7 +55,7 @@ class ProfileController extends Controller
                 $data['details'] = $profile ? [
                     'profile'  => $profile,
                     'contents' => $profile ? $profile->contents()
-                        ->with(['category:id,slug', 'motivationalDetails'])
+                        ->with(['category:id,slug', 'motivationalDetails', 'submitter:id,full_name'])
                         ->latest()
                         ->paginate(12) : [],
                     'sessions' => $profile ? $profile->sessions()->latest()->paginate(10) : []
@@ -85,7 +85,7 @@ class ProfileController extends Controller
                 $data['details'] = [
                     'profile'     => $profile,
                     'contents'    => $profile->contents()
-                        ->with(['category:id,slug', 'motivationalDetails'])
+                        ->with(['category:id,slug', 'motivationalDetails', 'submitter:id,full_name'])
                         ->latest()
                         ->paginate(3),
 
@@ -213,7 +213,7 @@ class ProfileController extends Controller
 
             return response()->json(
                 $profile->contents()
-                    ->with(['category:id,slug', 'motivationalDetails'])
+                    ->with(['category:id,slug', 'motivationalDetails', 'submitter:id,full_name'])
                     ->latest()
                     ->paginate(6)
             );
@@ -226,7 +226,7 @@ class ProfileController extends Controller
 
         return response()->json(
             $profile->contents()
-                ->with(['category:id,slug', 'motivationalDetails'])
+                ->with(['category:id,slug', 'motivationalDetails', 'submitter:id,full_name'])
                 ->latest()
                 ->paginate(6)
         );

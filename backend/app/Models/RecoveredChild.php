@@ -20,7 +20,13 @@ class RecoveredChild extends Model
         'recovery_duration',
         'location',
         'recovery_story',
+        'journey_steps',
     ];
+
+    protected $casts = [
+        'journey_steps' => 'array',
+    ];
+
     protected $appends = ['nickname'];
     public function getNicknameAttribute()
     {

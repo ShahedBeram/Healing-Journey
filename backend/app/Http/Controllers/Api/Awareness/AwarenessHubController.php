@@ -13,7 +13,7 @@ class AwarenessHubController extends Controller
      */
     public function index(Request $request)
     {
-        $contents = AwarenessMotivationalContent::with('content')
+        $contents = AwarenessMotivationalContent::with(['content.submitter:id,full_name'])
             ->whereHas('content', function ($q) {
                 $q->where('status', 'approved');
             })

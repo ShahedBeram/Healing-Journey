@@ -12,6 +12,17 @@ class RecoveredChildUpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $steps = $this->input('journey_steps');
+        if (is_string($steps)) {
+            $decoded = json_decode($steps, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $this->merge(['journey_steps' => $decoded]);
+            }
+        }
+    }
+
     public function rules(): array
     {
         return [
@@ -22,6 +33,9 @@ class RecoveredChildUpdateRequest extends FormRequest
             'recovery_date' => 'nullable|date',
             'location' => 'nullable|string|max:255',
             'recovery_story' => 'nullable|string',
+            'journey_steps' => 'nullable|array',
+            'journey_steps.*.label' => 'nullable|string|max:100',
+            'journey_steps.*.sub' => 'nullable|string|max:150',
         ];
     }
 }

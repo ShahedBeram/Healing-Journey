@@ -38,16 +38,17 @@ class HomeController extends Controller
         $successStories = RecoveredChild::whereHas('user', function ($query) {
             $query->where('account_status', 'approved');
         })
-            ->with('user:id,full_name')
+            ->with('user:id,full_name,profile_picture')
             ->latest()
             ->take(3)
             ->get()
             ->map(function ($story) {
                 return [
-                    'id'             => $story->user_id,
-                    'full_name'      => $story->user->full_name,
-                    'recovery_story' => $story->recovery_story,
-                    'nickname'       => $story->nickname,
+                    'id'              => $story->user_id,
+                    'full_name'       => $story->user->full_name,
+                    'recovery_story'  => $story->recovery_story,
+                    'nickname'        => $story->nickname,
+                    'profile_picture' => $story->user->profile_picture,
                 ];
             });
 
