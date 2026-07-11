@@ -39,7 +39,7 @@ Technical reference for the Healing Journey API endpoints, describing the commun
 
 Follow the steps below to set up the Laravel backend locally.
 
-```bash
+````bash
 # Install PHP dependencies
 composer install
 
@@ -57,9 +57,17 @@ php artisan migrate --seed
 # Create the storage symbolic link
 php artisan storage:link
 
+# To automatically update activity session statuses (approved → ongoing → completed), the Laravel Scheduler must be running.
+
+# For local development, run:
+
+```bash
+php artisan schedule:work
+
+
 # Start the development server
 php artisan serve
-```
+````
 
 The API will be available at:
 
